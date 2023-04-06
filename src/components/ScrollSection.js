@@ -22,7 +22,7 @@ function ScrollSection() {
           scrollTrigger: {
             trigger: triggerRef.current,
             start: "top top",
-            scrub: 0.6,
+            scrub: 0.2,
             pin: true,
             markers: true,
           },
@@ -41,10 +41,14 @@ function ScrollSection() {
       {/* The div below act just as a trigger. As the doc suggests, the trigger and
       the animation should alway be two separated refs */}
       <div ref={triggerRef}>
-        <div ref={sectionRef} className="scroll-section-inner" style={{ width: `${scrollSections * 100}vh` }}>
+        <div
+          ref={sectionRef}
+          className="scroll-section-inner"
+          style={{ width: `${scrollSections * 100}vh` }}
+        >
           {Array.from({ length: scrollSections }).map((section, index) => (
             <div className="scroll-section" key={index}>
-              <h3>Section {index +1}</h3>
+              <h3>Section {index + 1}</h3>
             </div>
           ))}
         </div>
