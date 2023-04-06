@@ -9,31 +9,28 @@ function ScrollSection() {
   const scrollSections = 4;
 
   useLayoutEffect(() => {
-    const pin = gsap.fromTo(
-      sectionRef.current,
-      {
-        translateX: 0,
-      },
-      {
-        translateX: `-${(scrollSections - 1) * 100}vw`,
-        ease: "none",
-        duration: 1,
-        scrollTrigger: {
-          trigger: triggerRef.current,
-          start: "top top",
-          // end: "2000 top",
-          scrub: 0.6,
-          pin: true,
-          markers: true,
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        sectionRef.current,
+        {
+          translateX: 0,
         },
-      }
-    );
-    return () => {
-      {
-        /* A return function for killing the animation on component unmount */
-      }
-      pin.kill();
-    };
+        {
+          translateX: `-${(scrollSections - 1) * 100}vw`,
+          ease: "none",
+          duration: 1,
+          scrollTrigger: {
+            trigger: triggerRef.current,
+            start: "top top",
+            scrub: 0.6,
+            pin: true,
+            markers: true,
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
